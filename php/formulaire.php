@@ -16,6 +16,10 @@ if(isset($_GET["nom"])){
     echo $_GET["nom"];
 };
 
+if(isset($_POST["submit"])){
+    print_r($_POST);
+}
+
 
 ?>
 <!DOCTYPE html>
@@ -34,6 +38,15 @@ if(isset($_GET["nom"])){
     <input type="submit">
 </form>
 
+<h2>Checkbox</h2>
+<h2>Les fruits que vous aimez</h2>
+<form action="" method="post">
+    <p><input type="checkbox" name="fruit[]" value="Banane">Banane</p>
+    <p><input type="checkbox" name="fruit[]" value="Pomme">Pomme</p>
+    <p><input type="checkbox" name="fruit[]" value="Poire">Poire</p>
+    <input type="submit" name="submit">
+    //* Donner le meme name a les input avec les [] pour creer un tableaux et pouvoir stocker tous les donnes coches
+</form>
 
 </body>
 
