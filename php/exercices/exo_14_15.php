@@ -43,7 +43,7 @@ if (isset($_POST["submit"])) {
 }
 
 
-// Exercice 16 :
+// Exercice 14 :
 // a) Créer une page php,
 
 // b) Ajouter le script php permettant de se connecter à la base de données articles,
@@ -106,7 +106,7 @@ if (isset($listArticles)) {
 </head>
 
 <body>
-    <h1>Exo 15 et 16 BDD</h1>
+    <h1>Exo 14 et 15 BDD</h1>
     <form action="" method="post">
         <input type="text" name="nom_article" placeholder="Nom de l'article">
         <input type="text" name="contenu_article" placeholder="Contenu de l'article">

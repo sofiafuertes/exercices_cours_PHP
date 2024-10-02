@@ -6,7 +6,7 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Exo 14 : Formulaire TTC</h1>
+    <h1>Exo 13: Formulaire TTC</h1>
     <form action="exo_14.php" method="POST">
         <input type="number" name="prix_HT" placeholder="Prix HT" step="0.01">
         <input type="number" name="quantite" placeholder="Quantité" step="1">
