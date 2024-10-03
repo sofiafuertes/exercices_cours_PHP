@@ -19,22 +19,22 @@ if(isset($_SESSION['loginCo']) AND isset($_SESSION['passwordCo'])){
 
 $UpdateForm = ""; 
 
-if(isset($_POST['update'])){
-    $UpdateForm = "<form method='post'>
-    <input type='text' name='name_user' placeholder='your name'>
-    <input type='text' name='first_name_user' placeholder='Your first name'>
-    <input type='email' name='login_user' placeholder='Your username'>
-    <input type='password' name='mdp_user' placeholder='Your password'>
-    <input type='submit' name='modifier' value='Modifier'>
-    <input type='submit' name='exit' value='exit'>
-</form>";
-}
+// if(isset($_POST['update'])){
+//     $UpdateForm = "<form method='post'>
+//     <input type='text' name='name_user' placeholder='your name'>
+//     <input type='text' name='first_name_user' placeholder='Your first name'>
+//     <input type='email' name='login_user' placeholder='Your username'>
+//     <input type='password' name='mdp_user' placeholder='Your password'>
+//     <input type='submit' name='modifier' value='Modifier'>
+//     <input type='submit' name='exit' value='exit'>
+// </form>";
+// }
 
-function modifyData(){
-    $bdd = new PDO('mysql:host=localhost;dbname=task', 'root', '', options: array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+// function modifyData(){
+//     $bdd = new PDO('mysql:host=localhost;dbname=task', 'root', '', options: array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
 
-    $req = $bdd -> prepare('UPDATE users SET ')
-}
+//     $req = $bdd -> prepare('UPDATE users SET ');
+// };
 
 
 ?>
@@ -50,6 +50,7 @@ function modifyData(){
 <header>
     <nav>
         <a href="index.php">Accueil</a>
+        <a href="inscription.php">Inscription</a>
         <a href="mon_compte.php">Mon compte</a>
         <a href="deconnexion.php">Deconnexion</a>
     </nav>

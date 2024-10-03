@@ -154,6 +154,14 @@ if(isset($userList)){
     <title>Document</title>
 </head>
 <body>
+<header>
+    <nav>
+        <a href="index.php">Accueil</a>
+        <a href="inscription.php">Inscription</a>
+        <a href="mon_compte.php">Mon compte</a>
+        <a href="deconnexion.php">Deconnexion</a>
+    </nav>
+</header>
     <h1>Exo 16</h1>
     <!-- Creation du formulaire -->
 <form action="" method="post">

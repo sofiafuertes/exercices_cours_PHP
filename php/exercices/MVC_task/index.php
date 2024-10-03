@@ -2,15 +2,13 @@
 //*Activation de SESSION 
 session_start();
 
+include './utils/functions.php';
+include './model/model_user_connexion.php';
+
 $message = ""; 
 $class = "";
 $classNav = "displayNone";
 
-//* Fonction pour nettoyer les donnees 
-function sanitize($data)
-{
-    return htmlentities(strip_tags(stripslashes(trim($data))));
-}
 
 //*Fonction pour chequer si les champs sont vides et filtrer, nettoyer les donnees 
 function sendCleanData(){
@@ -31,33 +29,7 @@ function sendCleanData(){
     //* cet fonction retournera un tableau avec le $login et le $psw
     return [$login, $psw];
 
-}
-
-
-//* Fonction pour recuperer et verifier si le login de l'utilisataeur il est deja dans la bdd
-function readUserByLogin($login_user){
-
-    //* Connexion avec la bdd
-    $bdd = new PDO('mysql:host=localhost;dbname=task', 'root', '', options: array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
-
-    //* Requete pour recuperer les donnes de les users
-    try {
-        $req = $bdd -> prepare ('SELECT login_user, mdp_user, id_user, name_user, first_name_user FROM users WHERE login_user = ?');
-
-        // introduire l elogin de l'user das ma requete 
-        $req ->bindParam(1,$login_user, PDO::PARAM_STR);
-
-        $req -> execute();
-
-        $data = $req -> fetchAll();
-
-        return $data; 
-
-    } catch (Exception $error) {
-        return $error -> getMessage();
-    }
-}
-
+};
 
 //* Une fois que le utilisiteur veux ce connecter, on va a nettoyer les donnes avec la fonction sendCleanData(), on va a chequer que le login ($data[0]) il est enrigestrer dans la bdd. 
 if (isset($_POST['connexion'])) {
@@ -78,51 +50,13 @@ if (isset($_POST['connexion'])) {
     } else {
         $message = "Le mot de passe est incorrect";
     }
-}
+};
 
 //* Chacher le formulaire de connexion une fois connecté
 if(isset($_SESSION['id_user'])){
     $class = "displayNone";
     $classNav = "";
-}
+};
 
-
-
-
-?>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <title>Document</title>
-</head>
-<body>
-<header>
-    <nav>
-        <a href="index.php">Accueil</a>
-        <a href="inscription.php">Inscription</a>
-        <a href="mon_compte.php" class="<?php echo $classNav ?>">Mon compte</a>
-        <a href="deconnexion.php">Deconnexion</a>
-    </nav>
-</header>
-
-
-    <h1>Accueil</h1>
-    <!-- Creation du formulaire -->
-<section class ="<?php echo $class ?>">
-    <h2>Connexion</h2>
-<form action="" method="post">
-    <input type="email" name="loginCo" placeholder="Login">
-    <input type="text" name="passwordCo" placeholder="Password">
-    <input type="submit" name="connexion" value="connexion">
-</form>
-</section>
-<p><?php echo $message ?> </p>
-
-
-</body>
-
-</html>
+include './view/view_header.php';
+include './view/view_acceuil_conection.php';
