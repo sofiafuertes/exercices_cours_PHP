@@ -38,28 +38,30 @@ function sendCleanData()
 if (isset($_POST['ajouter'])) {
     $tab = sendCleanData();
     // print_r($tab);
-    $name_cat = readCategoryByName($tab[0]);
+    $newCategory = new ModelCategorie($tab[0]);
+    $name_cat = $newCategory->readCategoryByName();
     if (empty($name_cat)) {
-        $message = addCategory($tab[0]);
+        $newCategory->setNameCategory($tab[0]);
+        $message = $newCategory->addCategory();
     } else {
         $message = "Cette category existe déjà en BDD !";
     }
 }
 
-//* Affichage de la list des caregories
-if(isset($categoryList)){
-    $data = readCategories();
-    if(gettype($data) == 'string'){
-        $categoryList = $data;
-    }else{
-        foreach ($data as $category) {
-        $categoryList .= "<article style='border-bottom : 2px solid green'>
-                <p>Id category: {$category['id_category']} </p>
-                <p>Nom category : {$category['name_category']}</p>
-                </article>";
-        }
-    }
-}
+// //* Affichage de la list des caregories
+// if(isset($categoryList)){
+//     $data = readCategories();
+//     if(gettype($data) == 'string'){
+//         $categoryList = $data;
+//     }else{
+//         foreach ($data as $category) {
+//         $categoryList .= "<article style='border-bottom : 2px solid green'>
+//                 <p>Id category: {$category['id_category']} </p>
+//                 <p>Nom category : {$category['name_category']}</p>
+//                 </article>";
+//         }
+//     }
+// }
 
 
 

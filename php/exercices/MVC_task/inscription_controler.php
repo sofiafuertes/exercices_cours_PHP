@@ -41,29 +41,38 @@ if(isset($_POST['submit'])){
     if($tab['erreur'] != ''){
         $message = $tab['erreur'];
     }else{
-        if(empty(readUserByLogin($tab['login_user']))){
-        $message = addUser($tab['name_user'],$tab['first_name_user'],$tab['login_user'],$tab['password_user']);
+        $newUser = new ModelUser($tab['login_user']);
+        if(empty($newUser-> readUserByLogin())){
+            $newUser -> setFirstNameUser($tab['first_name_user']);
+            $newUser-> setNameUser($tab['name_user']);
+            $newUser-> setMdpUser($tab['password_user']);
+            $message = $newUser-> addUser();
 }else{
     $message="Ce Login existe déjà en BDD !";
 }
 }}
 
 
-//* Affichage de la list de utilisateurs
-if(isset($userList)){
-    $data = readUsers();
-    if(gettype($data) == 'string'){
-        $userList = $data;
-    }else{
-        foreach ($data as $user) {
-        $userList .= "<article style='border-bottom : 2px solid green'>
-                <p>Nom utilisateur: {$user['name_user']} </p>
-                <p>Prenom utilisateur : {$user['first_name_user']}</p>
-                <p>Login utilisateur : {$user['login_user']}</p>
-                </article>";
-        }
-    }
-}
+// //* Affichage de la list de utilisateurs
+// if(isset($userList)){
+//     $data = readUsers();
+//     if(gettype($data) == 'string'){
+//         $userList = $data;
+//     }else{
+//         foreach ($data as $user) {
+//         $userList .= "<article style='border-bottom : 2px solid green'>
+//                 <p>Nom utilisateur: {$user['name_user']} </p>
+//                 <p>Prenom utilisateur : {$user['first_name_user']}</p>
+//                 <p>Login utilisateur : {$user['login_user']}</p>
+//                 </article>";
+//         }
+//     }
+// }
+
+
+
+
+
 
 include './view/view_header.php';
 include './view/view_inscription.php';

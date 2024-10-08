@@ -12,6 +12,7 @@
     <header>
         <nav>
             <a href="index.php">Accueil/Connexion</a>
+            <a href="mytasks.php" class="<?php echo $classNav ?>" >Mes Tâches</a>
             <a href="inscription_controler.php" class="<?php echo $class ?>">Inscription</a>
             <a href="mon_compte_controler.php" class="<?php echo $classNav ?>">Mon compte</a>
             <a href="deco_controler.php" class="<?php echo $classNav ?>">Deconnexion</a>
