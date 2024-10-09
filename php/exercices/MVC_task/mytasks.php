@@ -3,14 +3,19 @@
 session_start();
 
 //J'inclus mes ressources (fonction utilitaire, model)
-include './utils/functions.php';
 include './model/model_categories.php';
 include './model/model_tasks.php';
+include './utils/functions.php';
+include './manager/manageCategory.php';
+include './manager/manageTask.php';
+
 
 //Déclaration de mes variables d'affichages
 $optCategories = "";
 $message = "";
 $listeTasks = "";
+$class = "";
+$classNav = "displayNone";
 
 //Fonction pour mettre en forme le <select> des categories
 //Param : array ['id_categort'=> INT, 'name_category'=>string]
@@ -58,7 +63,8 @@ function testFormAddTask(){
 
 //Affichage des options pour le <select> categories
 //je récupère la liste de mes categories
-$data = readCategories();
+$ManageCategory = new ManageCategory('name_category');
+$data = $ManageCategory->readCategories();
 
 //je vérifie si je ne suis pas dans le cas d'erreur
 if(gettype($data) != 'string'){
@@ -68,7 +74,7 @@ if(gettype($data) != 'string'){
     }
 }
 
-//AJOUT D'UNE TASK
+//AJOUT D'UNE TASK avec la class ModelTask
 //je vérifie que je reçois le formulaire
 if(isset($_POST['ajouterTask'])){
     //je teste les données
@@ -80,23 +86,37 @@ if(isset($_POST['ajouterTask'])){
         $message = $tab['erreur'];
     }else{
         //je lance l'enregistrement de la task
-        $newTask = new ModelTask($tab['nom_task']);
-        $newTask->setContentTask($tab['content_task']);
-        $newTask->setDateTask($tab['date_task']);
-        $newTask->setIdUser($tab['id_user']);
-        $newTask->setIdCategory($tab['id_category']);
-        $message = $newTask->addTask();
+        $manageTask = new ManageTask($tab['nom_task']);
+        $manageTask->setContentTask($tab['content_task']);
+        $manageTask->setDateTask($tab['date_task']);
+        $manageTask->setIdUser($tab['id_user']);
+        $manageTask->setIdCategory($tab['id_category']);
+        $message = $manageTask->addTask();
     }
 }
 
 //AFFICHAGE DE LA LISTE DES TASKS
 //je récupère mes données
-$data = readTasksByUser($_SESSION['id_user']);
+$manageTask = new ManageTask('nom_task');
+$manageTask->setIdUser($_SESSION['id_user']);
+$data = $manageTask->readTasksByUser();
 
 //J'affiche la liste
 foreach($data as $task){
     $listeTasks = $listeTasks.cardTask($task);
 }
+
+
+
+//* Cacher le formulaire de connexion une fois connecté
+if(isset($_SESSION['id_user'])){
+    $class = "displayNone";
+    $classNav = "";
+};
+
+
+
+
 
 //j'inclus les view
 include './view/view_header.php';

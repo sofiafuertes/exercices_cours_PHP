@@ -1,74 +1,74 @@
 <?php 
-function addCategory($name_category){
-    //*Connexion avec la bdd
-    $bdd = new PDO('mysql:host=localhost;dbname=task','root','',
-    array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+// function addCategory($name_category){
+//     //*Connexion avec la bdd
+//     $bdd = new PDO('mysql:host=localhost;dbname=task','root','',
+//     array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
 
-    //* Try...Catch pour faire la requete de envoie de donnees a la bdd et gerer des possibles erreurs
-    try {
-        //* Preparation requete
-        $req = $bdd -> prepare ('INSERT INTO categories (name_category) VALUES (?)');
+//     //* Try...Catch pour faire la requete de envoie de donnees a la bdd et gerer des possibles erreurs
+//     try {
+//         //* Preparation requete
+//         $req = $bdd -> prepare ('INSERT INTO categories (name_category) VALUES (?)');
 
-        //* Relie les donnes a ? 
-        $req -> bindParam(1,$name_category,PDO::PARAM_STR);
+//         //* Relie les donnes a ? 
+//         $req -> bindParam(1,$name_category,PDO::PARAM_STR);
 
-        //* Execution de la requete
-        $req -> execute();
+//         //* Execution de la requete
+//         $req -> execute();
 
-        //* Message de confirmation
-        return "$name_category a été ajouté avec succès";
+//         //* Message de confirmation
+//         return "$name_category a été ajouté avec succès";
 
-    } catch (Exception $error) {
-        return $error -> getMessage();
-    }
-}
+//     } catch (Exception $error) {
+//         return $error -> getMessage();
+//     }
+// }
 
 
 //* Creation de la fonction pour aficher la list de utilisateurs de la bdd
 
-function readCategories(){
+// function readCategories(){
 
-    //* Connexion avec la bdd
-    $bdd = new PDO('mysql:host=localhost;dbname=task', 'root', '', options: array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+//     //* Connexion avec la bdd
+//     $bdd = new PDO('mysql:host=localhost;dbname=task', 'root', '', options: array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
 
-    //* Requete pour recuperer les donnes de les categories
-    try {
-        $req = $bdd -> prepare ('SELECT id_category, name_category FROM categories ');
+//     //* Requete pour recuperer les donnes de les categories
+//     try {
+//         $req = $bdd -> prepare ('SELECT id_category, name_category FROM categories ');
 
-        $req -> execute();
+//         $req -> execute();
 
-        $data = $req -> fetchAll();
+//         $data = $req -> fetchAll();
 
-        return $data; 
+//         return $data; 
 
-    } catch (Exception $error) {
-        return $error -> getMessage();
-    }
-}
+//     } catch (Exception $error) {
+//         return $error -> getMessage();
+//     }
+// }
 
-//* Fonction pour recuperer une category en bdd selon le nom
-function readCategoryByName($name_category){
+// //* Fonction pour recuperer une category en bdd selon le nom
+// function readCategoryByName($name_category){
 
-    //* Connexion avec la bdd
-    $bdd = new PDO('mysql:host=localhost;dbname=task', 'root', '', options: array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+//     //* Connexion avec la bdd
+//     $bdd = new PDO('mysql:host=localhost;dbname=task', 'root', '', options: array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
 
-    //* Requete pour recuperer les donnes de les users
-    try {
-        $req = $bdd -> prepare ('SELECT name_category FROM categories WHERE name_category = ?');
+//     //* Requete pour recuperer les donnes de les users
+//     try {
+//         $req = $bdd -> prepare ('SELECT name_category FROM categories WHERE name_category = ?');
 
-        // introduire l elogin de l'user das ma requete 
-        $req ->bindParam(1,$name_category, PDO::PARAM_STR);
+//         // introduire l elogin de l'user das ma requete 
+//         $req ->bindParam(1,$name_category, PDO::PARAM_STR);
 
-        $req -> execute();
+//         $req -> execute();
 
-        $data = $req -> fetchAll();
+//         $data = $req -> fetchAll();
 
-        return $data; 
+//         return $data; 
 
-    } catch (Exception $error) {
-        return $error -> getMessage();
-    }
-}
+//     } catch (Exception $error) {
+//         return $error -> getMessage();
+//     }
+// }
 
 
 class ModelCategorie{
@@ -79,7 +79,7 @@ class ModelCategorie{
     }
 
     public function getNameCategory(){
-        $this->nameCategory;
+        return $this->nameCategory;
     }
 
     public function setNameCategory(?string $nameCategory): ModelCategorie{
@@ -87,71 +87,71 @@ class ModelCategorie{
         return $this;
     }
 
-    public function addCategory():string{
-        //*Connexion avec la bdd
-        $bdd = new PDO('mysql:host=localhost;dbname=task','root','',
-        array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+//     public function addCategory():string{
+//         //*Connexion avec la bdd
+//         $bdd = new PDO('mysql:host=localhost;dbname=task','root','',
+//         array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
     
-        //* Try...Catch pour faire la requete de envoie de donnees a la bdd et gerer des possibles erreurs
-        try {
-            //* Preparation requete
-            $req = $bdd -> prepare ('INSERT INTO categories (name_category) VALUES (?)');
+//         //* Try...Catch pour faire la requete de envoie de donnees a la bdd et gerer des possibles erreurs
+//         try {
+//             //* Preparation requete
+//             $req = $bdd -> prepare ('INSERT INTO categories (name_category) VALUES (?)');
     
-            //* Relie les donnes a ? 
-            $req -> bindParam(1,$this->nameCategory,PDO::PARAM_STR);
+//             //* Relie les donnes a ? 
+//             $req -> bindParam(1,$this->nameCategory,PDO::PARAM_STR);
     
-            //* Execution de la requete
-            $req -> execute();
+//             //* Execution de la requete
+//             $req -> execute();
     
-            //* Message de confirmation
-            return " $this->nameCategory a été ajouté avec succès";
+//             //* Message de confirmation
+//             return " $this->nameCategory a été ajouté avec succès";
     
-        } catch (Exception $error) {
-            return $error -> getMessage();
-        }
-    }
+//         } catch (Exception $error) {
+//             return $error -> getMessage();
+//         }
+//     }
 
-    public function readCategories():array|string{
+//     public function readCategories():array|string{
 
-        //* Connexion avec la bdd
-        $bdd = new PDO('mysql:host=localhost;dbname=task', 'root', '', options: array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+//         //* Connexion avec la bdd
+//         $bdd = new PDO('mysql:host=localhost;dbname=task', 'root', '', options: array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
     
-        //* Requete pour recuperer les donnes de les categories
-        try {
-            $req = $bdd -> prepare ('SELECT id_category, name_category FROM categories ');
+//         //* Requete pour recuperer les donnes de les categories
+//         try {
+//             $req = $bdd -> prepare ('SELECT id_category, name_category FROM categories ');
     
-            $req -> execute();
+//             $req -> execute();
     
-            $data = $req -> fetchAll();
+//             $data = $req -> fetchAll();
     
-            return $data; 
+//             return $data; 
     
-        } catch (Exception $error) {
-            return $error -> getMessage();
-        }
-    }
+//         } catch (Exception $error) {
+//             return $error -> getMessage();
+//         }
+//     }
 
-    //* Fonction pour recuperer une category en bdd selon le nom
-public function readCategoryByName():array|string{
+//     //* Fonction pour recuperer une category en bdd selon le nom
+// public function readCategoryByName():array|string{
 
-    //* Connexion avec la bdd
-    $bdd = new PDO('mysql:host=localhost;dbname=task', 'root', '', options: array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+//     //* Connexion avec la bdd
+//     $bdd = new PDO('mysql:host=localhost;dbname=task', 'root', '', options: array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
 
-    //* Requete pour recuperer les donnes de les users
-    try {
-        $req = $bdd -> prepare ('SELECT name_category FROM categories WHERE name_category = ?');
+//     //* Requete pour recuperer les donnes de les users
+//     try {
+//         $req = $bdd -> prepare ('SELECT name_category FROM categories WHERE name_category = ?');
 
-        // introduire l elogin de l'user das ma requete 
-        $req ->bindParam(1,$this->nameCategory, PDO::PARAM_STR);
+//         // introduire l elogin de l'user das ma requete 
+//         $req ->bindParam(1,$this->nameCategory, PDO::PARAM_STR);
 
-        $req -> execute();
+//         $req -> execute();
 
-        $data = $req -> fetchAll();
+//         $data = $req -> fetchAll();
 
-        return $data; 
+//         return $data; 
 
-    } catch (Exception $error) {
-        return $error -> getMessage();
-    }
-}
+//     } catch (Exception $error) {
+//         return $error -> getMessage();
+//     }
+// }
 }

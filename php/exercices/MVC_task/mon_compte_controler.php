@@ -21,6 +21,12 @@ if(isset($_SESSION['loginCo']) AND isset($_SESSION['passwordCo'])){
 }
 
 
+//* Chacher le formulaire de connexion une fois connecté
+if(isset($_SESSION['id_user'])){
+    $class = "displayNone";
+    $classNav = "";
+};
+
 include './view/view_header.php';
 include './view/view_mon_compte.php';
 

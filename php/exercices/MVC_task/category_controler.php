@@ -5,6 +5,7 @@ session_start();
 //*Include de le model categories et fichier functions utilitaires
 include './model/model_categories.php';
 include './utils/functions.php';
+include './manager/manageCategory.php';
 
 //* Declaration de variables 
 $message = "";
@@ -38,30 +39,31 @@ function sendCleanData()
 if (isset($_POST['ajouter'])) {
     $tab = sendCleanData();
     // print_r($tab);
-    $newCategory = new ModelCategorie($tab[0]);
-    $name_cat = $newCategory->readCategoryByName();
+    $manageCategory = new ManageCategory($tab[0]);
+    $name_cat = $manageCategory->readCategoryByName();
     if (empty($name_cat)) {
-        $newCategory->setNameCategory($tab[0]);
-        $message = $newCategory->addCategory();
+        $manageCategory->setNameCategory($tab[0]);
+        $message = $manageCategory->addCategory();
     } else {
         $message = "Cette category existe déjà en BDD !";
     }
 }
 
-// //* Affichage de la list des caregories
-// if(isset($categoryList)){
-//     $data = readCategories();
-//     if(gettype($data) == 'string'){
-//         $categoryList = $data;
-//     }else{
-//         foreach ($data as $category) {
-//         $categoryList .= "<article style='border-bottom : 2px solid green'>
-//                 <p>Id category: {$category['id_category']} </p>
-//                 <p>Nom category : {$category['name_category']}</p>
-//                 </article>";
-//         }
-//     }
-// }
+//* Affichage de la list des caregories
+if(isset($categoryList)){
+    $manageCategory = new ManageCategory("name_category");
+    $data = $manageCategory->readCategories();
+    if(gettype($data) == 'string'){
+        $categoryList = $data;
+    }else{
+        foreach ($data as $category) {
+        $categoryList .= "<article style='border-bottom : 2px solid green'>
+                <p>Id category: {$category['id_category']} </p>
+                <p>Nom category : {$category['name_category']}</p>
+                </article>";
+        }
+    }
+}
 
 
 

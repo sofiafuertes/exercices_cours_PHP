@@ -2,6 +2,7 @@
 
 include './model/model_users_incription.php';
 include './utils/functions.php';
+include './manager/manageUser.php';
 
 $userList = "";
 $message = "";
@@ -41,35 +42,40 @@ if(isset($_POST['submit'])){
     if($tab['erreur'] != ''){
         $message = $tab['erreur'];
     }else{
-        $newUser = new ModelUser($tab['login_user']);
-        if(empty($newUser-> readUserByLogin())){
-            $newUser -> setFirstNameUser($tab['first_name_user']);
-            $newUser-> setNameUser($tab['name_user']);
-            $newUser-> setMdpUser($tab['password_user']);
-            $message = $newUser-> addUser();
+        $manageUser = new ManageUser($tab['login_user']);
+        if(empty($manageUser-> readUserByLogin())){
+            $manageUser -> setFirstNameUser($tab['first_name_user']);
+            $manageUser-> setNameUser($tab['name_user']);
+            $manageUser-> setMdpUser($tab['password_user']);
+            $message = $manageUser-> addUser();
 }else{
     $message="Ce Login existe déjà en BDD !";
 }
 }}
 
 
-// //* Affichage de la list de utilisateurs
-// if(isset($userList)){
-//     $data = readUsers();
-//     if(gettype($data) == 'string'){
-//         $userList = $data;
-//     }else{
-//         foreach ($data as $user) {
-//         $userList .= "<article style='border-bottom : 2px solid green'>
-//                 <p>Nom utilisateur: {$user['name_user']} </p>
-//                 <p>Prenom utilisateur : {$user['first_name_user']}</p>
-//                 <p>Login utilisateur : {$user['login_user']}</p>
-//                 </article>";
-//         }
-//     }
-// }
+//* Affichage de la list de utilisateurs
+if(isset($userList)){
+    $manageUser = new ManageUser('login_user');
+    $data =  $manageUser->readUsers();
+    if(gettype($data) == 'string'){
+        $userList = $data;
+    }else{
+        foreach ($data as $user) {
+        $userList .= "<article style='border-bottom : 2px solid green'>
+                <p>Nom utilisateur: {$user['name_user']} </p>
+                <p>Prenom utilisateur : {$user['first_name_user']}</p>
+                <p>Login utilisateur : {$user['login_user']}</p>
+                </article>";
+        }
+    }
+}
 
-
+//* Chacher le formulaire de connexion une fois connecté
+if(isset($_SESSION['id_user'])){
+    $class = "displayNone";
+    $classNav = "";
+};
 
 
 
