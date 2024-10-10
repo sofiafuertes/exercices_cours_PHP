@@ -38,7 +38,7 @@ function addTask(){
 //Param : int
 //Return : array | string
 function readTasksByUser():array|string {
-    $idUser =$this->getIdUSer(); 
+    $idUser = $this->getIdUSer(); 
 //1Er Etape : Instancier l'objet de connexion PDO
 $bdd = new PDO('mysql:host=localhost;dbname=task','root','',array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
 

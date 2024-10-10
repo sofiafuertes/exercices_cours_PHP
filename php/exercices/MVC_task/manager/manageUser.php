@@ -1,6 +1,6 @@
 <?php 
 
-class ManageUser extends ModelUser{
+class ManageUser extends ModelUserIns{
 
     public function addUser():string{ 
 

@@ -1,24 +1,49 @@
 <?php 
-//* Fonction pour recuperer et verifier si le login de l'utilisataeur il est deja dans la bdd
-function readUserByLogin($login_user){
 
-//* Connexion avec la bdd
-$bdd = new PDO('mysql:host=localhost;dbname=task', 'root', '', options: array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+class ModelUserCo{
+    private ?int $idUser;
+    private ?string $nameUser;
+    private ?string $firstNameUser;
+    private ?string $loginUser;
+    private ?string $mdpUser;
 
-//* Requete pour recuperer les donnes de les users
-try {
-    $req = $bdd -> prepare ('SELECT login_user, mdp_user, id_user, name_user, first_name_user FROM users WHERE login_user = ?');
+    public function __construct(?string $loginUser){
+        $this -> loginUser = $loginUser;
+    }
 
-    // introduire l elogin de l'user das ma requete 
-    $req ->bindParam(1,$login_user, PDO::PARAM_STR);
+    //* GETTER
+    public function getIdUser(){
+        return $this->idUser;
+    }
+    public function getNameUser(){
+        return $this->nameUser;
+    } public function getFirstNameUser(){
+        return $this->firstNameUser;
+    } public function getLoginUser(){
+        return $this->loginUser;
 
-    $req -> execute();
+    } public function getMdpUser(){
+        return $this->mdpUser;
+    }
+    //* SETTER
+    public function setIdUser(?int $idUser):ModelUserCo{
+        $this-> idUser = $idUser;
+        return $this;
+    }
+    public function setNameUser(?string $nameUser):ModelUserCo{
+        $this-> nameUser= $nameUser;
+        return $this;
+    } public function setFirstNameUser(?string $firstNameUser):ModelUserCo{
+        $this-> firstNameUser = $firstNameUser;
+        return $this;
+    } public function setLoginUser(?string $loginUser):ModelUserCo{
+        $this-> loginUser = $loginUser;
+        return $this;
+    } public function setMdpUser(?string $mdpUser):ModelUserCo{
+        $this-> mdpUser = $mdpUser;
+        return $this;
+    }
 
-    $data = $req -> fetchAll();
 
-    return $data; 
-
-} catch (Exception $error) {
-    return $error -> getMessage();
 }
-}
+

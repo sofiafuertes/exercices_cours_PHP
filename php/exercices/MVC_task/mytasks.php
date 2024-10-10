@@ -6,8 +6,8 @@ session_start();
 include './model/model_categories.php';
 include './model/model_tasks.php';
 include './utils/functions.php';
-include './manager/manageCategory.php';
 include './manager/manageTask.php';
+include './manager/manageCategory.php';
 
 
 //Déclaration de mes variables d'affichages

@@ -6,12 +6,12 @@
         <input type="text" name="first_name_user" placeholder="Your first name">
         <input type="email" name="login_user" placeholder="Your email">
         <input type="password" name="mdp_user" placeholder="Your password">
-        <input type="submit" name="submit" value="connexion">
+        <input type="submit" name="submit" value="Inscription">
     </form>
-    <p><?php echo $message ?> </p>
+    <p><?php echo $controlerAccueil->getMessage(); ?> </p>
     <section>
         <h2>Liste des utilisateurs</h2>
-        <p><?php echo $userList ?></p>
+        <p><?php echo $controlerAccueil->getUserList(); ?></p>
     </section>
 </main>
 
