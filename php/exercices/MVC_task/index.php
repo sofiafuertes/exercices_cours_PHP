@@ -1,68 +1,102 @@
 <?php
-//*Activation de SESSION 
+//* J'active la session
 session_start();
 
-include './utils/functions.php';
-include './model/model_user_connexion.php';
-include './manager/manageConnexion.php';
-
-$message = "";
-$class = "";
-$classNav = "displayNone";
+//* Inlclure ressources communes a chaque route
 
 
-//*Fonction pour chequer si les champs sont vides et filtrer, nettoyer les donnees 
-function sendCleanData()
-{
-    //*Verifier si les champs sont vides, si ils le sont on retourne on message de erreur
-    if (empty($_POST['loginCo']) or empty($_POST['passwordCo'])) {
-        return 'Veuillez remplir le Login ET le Mot de Passe !';
-    }
 
-    //*Nettoyer les donnees avec la fonction sanitize
-    $login = sanitize($_POST['loginCo']);
-    $psw = sanitize($_POST['passwordCo']);
+//Analyse de l'URL avec parse_url() et retourne ses composants
+$url = parse_url($_SERVER['REQUEST_URI']);
 
-    //* Filtrer le email
-    if (!filter_var($login, FILTER_VALIDATE_EMAIL)) {
-        return 'Login pas au bon format !';
-    }
+//test soit l'url a une route sinon on renvoi à la racine
+$path = isset($url['path']) ? $url['path'] : '/';
 
-    //* cet fonction retournera un tableau avec le $login et le $psw
-    return [$login, $psw];
+/*--------------------------ROUTER -----------------------------*/
+
+//test de la valeur $path dans l'URL et import de la ressource
+switch ($path) {
+
+    case $path === "/php/exercices_cours_PHP/php/exercices/MVC_task/":
+        include './utils/functions.php';
+        include './model/model_user_connexion.php';
+        include './manager/manageConnexion.php';
+        include './controler/header.php';
+        include './controler/accueil.php';
+        $controlerAccueil = new ControlerAccueil();
+        $controlerAccueil->sendCleanData();
+        $controlerAccueil->connexionUser();
+        $header = new ControlerHeader();
+        $header->displayNav();
+        include './view/view_header.php';
+        include './view/view_acceuil_conection.php';
+        break;
+
+    case $path === "/php/exercices_cours_PHP/php/exercices/MVC_task/inscription":
+        include './utils/functions.php';
+        include './model/model_users_incription.php';
+        include './manager/manageUser.php';
+        include './controler/header.php';
+        include './controler/inscription_controler.php';
+        $controlerInscription = new ControlerInscription();
+        $controlerInscription->testDonnesReçus();
+        $controlerInscription->afficherUserList();
+        $header = new ControlerHeader();
+        $header->displayNav();
+        include './view/view_header.php';
+        include './view/view_inscription.php';
+        break;
+
+    case $path === "/php/exercices_cours_PHP/php/exercices/MVC_task/mon_compte":
+        include './utils/functions.php';
+        include './controler/header.php';
+        include './controler/mon_compte_controler.php';
+        $moncompte = new ControlerCompte();
+        $moncompte->displayUserAccount();
+        $header = new ControlerHeader();
+        $header->displayNav();
+        include './view/view_header.php';
+        include './view/view_mon_compte.php';
+        break;
+
+    case $path === "/php/exercices_cours_PHP/php/exercices/MVC_task/tasks":
+        include './utils/functions.php';
+        include './model/model_categories.php';
+        include './model/model_tasks.php';
+        include './manager/manageTask.php';
+        include './manager/manageCategory.php';
+        include './controler/header.php';
+        include './controler/mytasks.php';
+        $tasks = new ControlerTask();
+        $tasks->registerTask();
+        $tasks->displayListTask();
+        $tasks->displaySelectCategory();
+        $header = new ControlerHeader();
+        $header->displayNav();
+        include './view/view_header.php';
+        include './view/view_task.php';
+        break;
+
+    case $path === "/php/exercices_cours_PHP/php/exercices/MVC_task/categories":
+        include './model/model_categories.php';
+        include './utils/functions.php';
+        include './manager/manageCategory.php';
+        include './controler/header.php';
+        include './controler/category_controler.php';
+        $category = new ControlerCategory();
+        $category->registerCategory();
+        $category->readCategories();
+        $header = new ControlerHeader();
+        $header->displayNav();
+        include './view/view_header.php';
+        include './view/view_categories.php';
+        break;
+
+    case $path === "/php/exercices_cours_PHP/php/exercices/MVC_task/deconnexion":
+        include './controler/deco_controler.php';
+        $deco = new Deconnexion();
+        $deco->deco();
+        break;
 
 }
-;
 
-//* Une fois que le utilisiteur veux ce connecter, on va a nettoyer les donnes avec la fonction sendCleanData(), on va a chequer que le login ($data[0]) il est enrigestrer dans la bdd. 
-if (isset($_POST['connexion'])) {
-    $data = sendCleanData();
-    $manageUserCo = new ManageUserCo($data[0]);
-    $loginUser = $manageUserCo->readUserByLogin();
-
-    //* Si le login il est vide on va a afficher un message qui dit que le mail il est pas enregistre dans la bdd et apres on verifie si la mot de passe correspondre a la mdp lie a ce login. Si elle correspondre on affiche message 'vous etes connecté' et on sauvegarde les donnes en la $_SESSION. 
-    if (empty($loginUser)) {
-        var_dump($loginUser);
-        $message = "C'est login il est pas enrigestré en bdd";
-    } else if (password_verify($_POST['passwordCo'], $loginUser[0]['mdp_user'])) {
-        $message = "Vous etes connecté";
-        $_SESSION['id_user'] = $loginUser[0]['id_user'];
-        $_SESSION['loginCo'] = $loginUser[0]['login_user'];
-        $_SESSION['name'] = $loginUser[0]['name_user'];
-        $_SESSION['first_name'] = $loginUser[0]['first_name_user'];
-        // print_r($_SESSION);
-    } else {
-        $message = "Le mot de passe est incorrect";
-    }
-}
-;
-
-//* Chacher le formulaire de connexion une fois connecté
-if (isset($_SESSION['id_user'])) {
-    $class = "displayNone";
-    $classNav = "";
-}
-;
-
-include './view/view_header.php';
-include './view/view_acceuil_conection.php';

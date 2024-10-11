@@ -1,13 +1,6 @@
 <?php
 
-session_start();
-
-include './model/model_users_incription.php';
-include './utils/functions.php';
-include './manager/manageUser.php';
-
-
-class ControlerAccueil
+class ControlerInscription
 {
     private string $userList;
     private string $message;
@@ -130,22 +123,8 @@ class ControlerAccueil
         return $this->message;
     }
 
-public function displayNav(){
-    if (isset($_SESSION['id_user'])) {
-        $this->setClass("displayNone");
-        $this->setClassNav("");
-    }
-}
-
 };
 
-$controlerAccueil = new ControlerAccueil();
-$controlerAccueil->displayNav();
-$controlerAccueil->testDonnesReçus();
-$controlerAccueil->afficherUserList();
 
 
 
-
-include './view/view_header.php';
-include './view/view_inscription.php';

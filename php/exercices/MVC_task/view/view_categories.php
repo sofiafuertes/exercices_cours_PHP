@@ -6,10 +6,10 @@
         <input type="text" name="name_category" placeholder="Nom de la categorie">
         <input type="submit" name="ajouter" value="Ajouter">
     </form>
-    <p><?php echo $message ?> </p>
+    <p><?php echo $category->getMessage() ?> </p>
     <section>
         <h4>Liste des categories dans la bdd</h4>
-        <p><?php echo $categoryList ?></p>
+        <p><?php echo $category->getcategoryList() ?></p>
     </section>
 </main>
 

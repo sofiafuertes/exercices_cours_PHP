@@ -11,12 +11,12 @@
 <body>
     <header>
         <nav>
-            <a href="index.php">Accueil/Connexion</a>
-            <a href="mytasks.php" class="<?php echo $classNav ?>" >Mes Tâches</a>
-            <a href="inscription_controler.php" class="<?php echo $class ?>">Inscription</a>
-            <a href="mon_compte_controler.php" class="<?php echo $classNav ?>">Mon compte</a>
-            <a href="category_controler.php" class="<?php echo $classNav ?>">Categories</a>
-            <a href="deco_controler.php" class="<?php echo $classNav ?>">Deconnexion</a>
+            <a href="/php/exercices_cours_PHP/php/exercices/MVC_task/">Accueil/Connexion</a>
+            <a href="/php/exercices_cours_PHP/php/exercices/MVC_task/tasks" class="<?php echo $header->getClassNav() ?>" >Mes Tâches</a>
+            <a href="/php/exercices_cours_PHP/php/exercices/MVC_task/inscription" class="<?php echo $header->getClass()?>">Inscription</a>
+            <a href="/php/exercices_cours_PHP/php/exercices/MVC_task/mon_compte" class="<?php echo $header->getClassNav() ?>">Mon compte</a>
+            <a href="/php/exercices_cours_PHP/php/exercices/MVC_task/categories" class="<?php echo $header->getClassNav() ?>">Categories</a>
+            <a href="/php/exercices_cours_PHP/php/exercices/MVC_task/deconnexion" class="<?php echo $header->getClassNav() ?>">Deconnexion</a>
             
 
         </nav>

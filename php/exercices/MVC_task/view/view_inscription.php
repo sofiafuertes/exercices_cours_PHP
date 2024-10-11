@@ -8,10 +8,10 @@
         <input type="password" name="mdp_user" placeholder="Your password">
         <input type="submit" name="submit" value="Inscription">
     </form>
-    <p><?php echo $controlerAccueil->getMessage(); ?> </p>
+    <p><?php echo $controlerInscription->getMessage(); ?> </p>
     <section>
         <h2>Liste des utilisateurs</h2>
-        <p><?php echo $controlerAccueil->getUserList(); ?></p>
+        <p><?php echo $controlerInscription->getUserList(); ?></p>
     </section>
 </main>
 
