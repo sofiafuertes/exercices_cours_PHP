@@ -2,11 +2,11 @@
 
 class Pokemon{
     //*Attributs
-    private string $nom;
-    private int $puissance;
+    private ?string $nom;
+    private ?int $puissance;
 
     //*Constructor
-    public function __construct(string $nom, int $puissance){
+    public function __construct(?string $nom, ?int $puissance){
         $this->nom = $nom;
         $this->puissance = $puissance;
     }

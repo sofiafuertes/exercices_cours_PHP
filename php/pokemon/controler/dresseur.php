@@ -2,11 +2,11 @@
 
 class Dresseur{
     //*Attributs
-    private string $nom;
-    private $pokemon;
+    private ?string $nom;
+    private ?Pokemon $pokemon;
 
     //* Constructor
-    public function __construct(string $nom, $pokemon)
+    public function __construct(?string $nom, ?Pokemon $pokemon)
     {
         $this->nom = $nom;
         $this->pokemon = $pokemon;
