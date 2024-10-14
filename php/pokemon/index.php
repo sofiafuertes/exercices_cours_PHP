@@ -10,13 +10,18 @@ $path = isset($url['path']) ? $url['path'] : '/';
 //test de la valeur $path dans l'URL et import de la ressource
 switch ($path) {
 
-    case $path === "/php/exercices_cours_PHP/php/exercices/pokemon/":
-        include "./manager/pikachu.php";
-        include "./manager/sasha.php";
-        include "./controler/dresseur.php";
-        include "./controler/pokemon.php";
-        $sasha = new Sasha("Sasha", new Pikachu("Pikachu",150));
-        $sasha->lancerPokemon();
-        $sasha->attaquerDresseur("Pierre");
+    case $path === "/php/exercices_cours_PHP/php/pokemon/":
+
+
         break;
     }
+
+    echo "hello";
+    echo "<br>";
+    include "./controler/dresseur.php";
+    include "./controler/pokemon.php";
+    include "./manager/sasha.php";
+    include "./manager/pikachu.php";
+    $sasha = new Sasha("Sasha", new Pikachu("Pikachu",150));
+    $sasha->lancerPokemon();
+    $sasha->attaquerDresseur("Pierre");

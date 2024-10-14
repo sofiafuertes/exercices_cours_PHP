@@ -4,12 +4,12 @@ class Sasha extends Dresseur{
 
     //* Methodes
     public function lancerPokemon():void{
-        echo $this->getPokemon() . "á toi!";
+        $nomPokemon = $this->getPokemon()->getNom();
+        echo "$nomPokemon á toi!";
+        echo "<br>";
     }
 
     public function attaquerDresseur(string $cible):void{
-        $pikachu = new Pikachu('pikachu',150);
-        
-        
+        $this->getPokemon()->action($cible);
     }
 }

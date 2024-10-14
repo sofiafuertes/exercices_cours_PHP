@@ -29,8 +29,9 @@ class Pokemon{
     }
 
     //*Methodes
-    public function attaquer($cible){
+    public function attaquer(string $cible){
         echo "$this->nom attaque $cible";
+        echo "<br>";
         return $this->getPuissance(); 
     }
     

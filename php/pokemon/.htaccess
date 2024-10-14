@@ -2,7 +2,7 @@
 RewriteEngine On
 
 #base du projet (emplacement a partir de la racine du serveur)
-RewriteBase /php/exercices_cours_PHP/php/exercices/pokemon 
+RewriteBase /php/exercices_cours_PHP/php/Pokemon
 
 #si c'est pas un repertoire
 RewriteCond %{REQUEST_FILENAME} !-d

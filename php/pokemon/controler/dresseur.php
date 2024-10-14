@@ -17,7 +17,7 @@ class Dresseur{
     {
         return $this->nom;
     }
-    public function getPokemon(): string
+    public function getPokemon(): Pokemon
     {
         return $this->pokemon;
     }
